@@ -1,0 +1,413 @@
+    var counter
+    var diskName
+    var diskSize
+    //Prompt user for disk name
+    write "1" to var:counter
+    write "Enter disk name: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    copy KEYBOARD_BUFFER to var:diskName
+    //Prompt user for disk name
+    jump label:validateDisk
+
+label validateDisk
+    var curLine
+    var curTableRow
+    var tableEnd
+    var prevBlockEnd
+    var curBlockStart
+    copy var:diskName to REG_A
+    write "1" to REG_B
+    write OP_READ_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+    copy REG_RES to var:diskSize
+
+    copy var:diskName to REG_A
+    write "2" to REG_B
+    write OP_READ_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy REG_RES to REG_A
+    write "START_PARTITION_TABLE" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if_not label:invalidTable
+
+    copy var:diskName to REG_A
+    write "3" to REG_B
+    write OP_READ_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy REG_RES to REG_A
+    write "PARTITION_ENTRIES " to REG_B
+    write OP_STARTS_WITH to REG_OP
+    cpu_exec
+    jump_if_not label:invalidTable
+
+    copy REG_RES to REG_A
+    write "2" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write "4" to REG_B
+    write OP_ADD to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:prevBlockEnd
+    copy REG_RES to var:tableEnd
+    write "4" to var:curLine
+
+label readPartitionTable
+    copy var:diskName to REG_A
+    copy var:curLine to REG_B
+    write OP_READ_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+    copy REG_RES to var:curTableRow
+
+    copy var:curTableRow to REG_A
+    write "1" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+    
+    copy REG_RES to REG_A
+    write "NAME" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if_not label:invalidTable
+
+    copy var:curTableRow to REG_A
+    write "3" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write "START_BLOCK" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if_not label:invalidTable
+
+    copy var:curTableRow to REG_A
+    write "5" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write "END_BLOCK" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if_not label:invalidTable
+
+    copy var:curTableRow to REG_A
+    write "4" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:curBlockStart
+
+    copy REG_RES to REG_A
+    copy var:prevBlockEnd to REG_B
+    write OP_CMP_LE to REG_OP
+    cpu_exec
+    jump_if label:invalidTable
+
+    copy var:curTableRow to REG_A
+    write "6" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:prevBlockEnd
+    copy REG_RES to REG_A
+    copy var:curBlockStart to REG_B
+    write OP_CMP_LE to REG_OP
+    cpu_exec
+
+    jump_if label:invalidTable
+
+    copy var:curLine to REG_A
+    write "1" to REG_B
+    write OP_ADD to REG_OP
+    cpu_exec
+    
+    copy REG_RES to var:curLine
+
+    copy var:curLine to REG_A
+    copy var:tableEnd to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+
+    jump_if label:start
+    jump label:readPartitionTable
+
+label start
+    copy var:diskName to REG_A
+    copy var:counter to REG_B
+    write OP_READ_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy REG_RES to REG_A
+    write "END_PARTITION_TABLE" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+
+    copy REG_RES to DISPLAY_BUFFER
+    write COLOR_CYAN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+    jump_if label:askUser
+
+    copy var:counter to REG_A
+    write OP_INCR to REG_OP
+    cpu_exec
+    copy REG_RES to var:counter
+    
+    jump label:start
+
+label askUser
+    var partitionCount
+    var diskSpaceStart
+    var PartitionEntries
+    write "Recreate partition table? yes/no: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    copy KEYBOARD_BUFFER to REG_A
+    write "no" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:exit
+
+    copy KEYBOARD_BUFFER to REG_A
+    write "yes" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if_not label:askUser
+
+    write "Enter number of partitions: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    copy KEYBOARD_BUFFER to var:partitionCount
+
+    copy var:diskName to REG_A
+    write "2" to REG_B
+    write "START_PARTITION_TABLE" to REG_C
+    write OP_WRITE_BLOCK to REG_OP
+    cpu_exec
+
+    copy var:partitionCount to REG_A
+    write "5" to REG_B
+    write OP_ADD to REG_OP
+    cpu_exec
+    copy REG_RES to var:diskSpaceStart
+
+    write "PARTITION_ENTRIES" to REG_A
+    copy var:partitionCount to REG_B
+    write " " to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:PartitionEntries
+
+    copy var:diskName to REG_A
+    write "3" to REG_B
+    copy var:PartitionEntries to REG_C
+    write OP_WRITE_BLOCK to REG_OP
+    cpu_exec
+
+    var diskCounter
+    write "4" to var:diskCounter
+    jump label:clearDisk
+    
+label clearDisk
+    copy var:diskName to REG_A
+    copy var:diskCounter to REG_B
+    write "" to REG_C
+    write OP_WRITE_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy var:diskCounter to REG_A
+    write OP_INCR to REG_OP
+    cpu_exec
+    copy REG_RES to var:diskCounter
+
+    copy var:tableEnd to REG_A
+    copy var:diskSpaceStart to REG_B
+    write OP_CMP_LT to REG_OP
+    cpu_exec
+    jump_if label:cond1
+    jump label:cond2
+label cond1
+    copy var:diskCounter to REG_A
+    copy var:diskSpaceStart to REG_B
+    write OP_CMP_LE to REG_OP
+    cpu_exec
+    jump_if_not label:pointerAlloc
+    jump label:clearDisk
+label cond2
+    copy var:diskCounter to REG_A
+    copy var:tableEnd to REG_B
+    write OP_CMP_LE to REG_OP
+    cpu_exec
+    jump_if_not label:pointerAlloc
+    jump label:clearDisk
+
+label pointerAlloc
+    var curPartition
+    var partitionRow
+    write "4" to var:curLine
+    write "1" to var:curPartition
+    jump label:createDisk
+
+label createDisk
+    var tableLine
+    write "Enter partition name: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    write "NAME" to REG_A
+    copy KEYBOARD_BUFFER to REG_B
+    write " " to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write "START_BLOCK" to REG_B
+    write " " to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    copy var:diskSpaceStart to REG_B
+    write " " to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write "END_BLOCK" to REG_B
+    write " " to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+
+    write "Enter partition size: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:tableLine
+
+    copy KEYBOARD_BUFFER to REG_A
+    copy var:diskSpaceStart to REG_B
+    write OP_ADD to REG_OP
+    cpu_exec
+
+    copy var:tableLine to REG_A
+    copy REG_RES to REG_B
+    write " " to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+    copy REG_RES to var:partitionRow
+
+    copy KEYBOARD_BUFFER to REG_A
+    copy var:diskSpaceStart to REG_B
+    write OP_ADD to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    copy var:diskSize to REG_B
+    write OP_CMP_LE to REG_OP
+    cpu_exec
+    jump_if_not label:invalidTable
+
+    copy REG_RES to REG_A
+    write "1" to REG_B
+    write OP_ADD to REG_OP
+    cpu_exec
+    copy REG_RES to var:diskSpaceStart
+
+    copy var:diskName to REG_A
+    copy var:curLine to REG_B
+    copy var:partitionRow to REG_C
+    write OP_WRITE_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy var:curLine to REG_A
+    write OP_INCR to REG_OP
+    cpu_exec
+    copy REG_RES to var:curLine
+
+    copy var:curPartition to REG_A
+    write OP_INCR to REG_OP
+    cpu_exec
+    copy REG_RES to var:curPartition
+
+    copy var:partitionCount to REG_A
+    copy var:curPartition to REG_B
+    write OP_CMP_LT to REG_OP
+    cpu_exec
+    jump_if label:closeTable
+    jump label:createDisk
+
+label closeTable
+    copy var:diskName to REG_A
+    copy var:curLine to REG_B
+    write "END_PARTITION_TABLE" to REG_C
+    write OP_WRITE_BLOCK to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write "Partition table created successfully" to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+    jump label:exit
+
+label invalidTable
+    write "Invalid partition table" to DISPLAY_BUFFER
+    write COLOR_RED to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+    jump label:exit
+
+label error
+    copy REG_ERROR to DISPLAY_BUFFER
+    write COLOR_RED to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+label exit
+    write OP_HALT to REG_OP
+    cpu_exec
