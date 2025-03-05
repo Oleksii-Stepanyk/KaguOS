@@ -1,0 +1,102 @@
+    var delay
+    var ticks
+    var progress
+    var barLength
+    var progressTemp
+    var barLengthTemp
+
+    write "" to 199 // reserve place in free memory
+    write 0 to var:progress
+    write 0 to var:progressTemp
+
+    write "Enter number of ticks: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    copy KEYBOARD_BUFFER to var:ticks
+    copy var:ticks to var:barLength
+    copy var:ticks to var:barLengthTemp
+
+    write "Enter delay between ticks: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    copy KEYBOARD_BUFFER to var:delay
+    jump label:generateProgressBar
+
+label generateProgressBar
+    copy var:progressTemp to REG_A
+    write 0 to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:generateBar
+    copy 199 to REG_A
+    write "g" to REG_B
+    write "" to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+    copy REG_RES to 199
+    copy var:progressTemp to REG_A
+    write OP_DECR to REG_OP
+    cpu_exec
+    copy REG_RES to var:progressTemp
+    jump label:generateProgressBar
+
+label generateBar
+    copy var:barLengthTemp to REG_A
+    write 0 to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:printProgressBar
+    copy 199 to REG_A
+    write "m" to REG_B
+    write "" to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+    copy REG_RES to 199
+    copy var:barLengthTemp to REG_A
+    write OP_DECR to REG_OP
+    cpu_exec
+    copy REG_RES to var:barLengthTemp
+    jump label:generateBar
+
+label printProgressBar
+    write 199 to REG_A
+    write 200 to REG_B
+    write OP_RENDER_BITMAP to REG_OP
+    cpu_exec
+    jump label:editValues
+
+label editValues
+    copy var:progress to REG_A
+    write OP_INCR to REG_OP
+    cpu_exec
+    copy REG_RES to var:progress
+    copy var:barLength to REG_A
+    write OP_DECR to REG_OP
+    cpu_exec
+    copy REG_RES to var:barLength
+    write "" to 199
+    copy var:progress to var:progressTemp
+    copy var:barLength to var:barLengthTemp
+    copy var:barLength to REG_A
+    write "-1" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    copy var:delay to REG_A
+    write OP_NOP to REG_OP
+    cpu_exec
+    jump_if label:kernelExit
+    jump label:generateProgressBar
+
+label kernelExit
+    write OP_HALT to REG_OP
+    cpu_exec
