@@ -9,7 +9,7 @@ var partitionName
 var partitionStartBlock
 var partitionEndBlock
 
-label start
+label startValidation
     write "Enter the disk name: " to DISPLAY_BUFFER
     write COLOR_GREEN to DISPLAY_COLOR
     write OP_DISPLAY_LN to REG_OP
@@ -51,6 +51,7 @@ label start
     copy REG_RES to var:partitionCount
     write "1" to var:counter
     write "4" to var:pointer
+
 label checkPartitions
     copy var:diskName to REG_A
     copy var:pointer to REG_B

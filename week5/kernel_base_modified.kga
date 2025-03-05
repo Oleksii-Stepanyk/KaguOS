@@ -65,8 +65,8 @@ cpu_exec
     var catStr
     write "cat" to var:catStr
 
-    var differenceStr
-    write "dif" to var:differenceStr
+    var validateStr
+    write "validate" to var:validateStr
 
 label kernel_start
     // Display prompt to enter the value:
@@ -126,10 +126,10 @@ label kernel_start
     jump_if label:cat_command
 
     copy var:parsedStr to REG_A
-    copy var:differenceStr to REG_B
+    copy var:validateStr to REG_B
     write OP_CMP_EQ to REG_OP
     cpu_exec
-    jump_if label:difference_command
+    jump_if label:validate_command
 
     jump label:kernel_start
 
@@ -188,103 +188,9 @@ label cat_command
         jump label:sys_fs_close
         jump label:kernel_start
 
-label difference_command
-    var file1
-    var file2
-    var block
-    var result
-    var file1Row
-    var file2Row
 
-    write "1" to var:block
-
-    write "Enter first file name: " to DISPLAY_BUFFER
-    write COLOR_GREEN to DISPLAY_COLOR
-    write OP_DISPLAY_LN to REG_OP
-    cpu_exec
-
-    write OP_READ_INPUT to REG_OP
-    cpu_exec
-
-    copy KEYBOARD_BUFFER to var:file1
-    
-    copy var:file1 to REG_A
-    copy PROGRAM_COUNTER to var:sys_return
-    jump label:sys_fs_open
-    jump_err label:error
-    copy REG_RES to var:file1
-
-    write "Enter second file name: " to DISPLAY_BUFFER
-    write COLOR_GREEN to DISPLAY_COLOR
-    write OP_DISPLAY_LN to REG_OP
-    cpu_exec
-
-    write OP_READ_INPUT to REG_OP
-    cpu_exec
-    jump_err label:error
-    copy KEYBOARD_BUFFER to var:file2
-
-    copy var:file2 to REG_A
-    copy PROGRAM_COUNTER to var:sys_return
-    jump label:sys_fs_open
-    jump_err label:error
-    copy REG_RES to var:file2
-
-    label find_difference
-        copy var:file1 to REG_A
-        copy var:block to REG_B
-        copy PROGRAM_COUNTER to var:sys_return
-        jump label:sys_fs_read
-
-        copy REG_RES to var:file1Row
-
-        copy var:file2 to REG_A
-        copy var:block to REG_B
-        copy PROGRAM_COUNTER to var:sys_return
-        jump label:sys_fs_read
-
-        copy REG_RES to var:file2Row
-
-        copy var:file1Row to REG_A
-        copy var:file2Row to REG_B
-        write OP_CMP_EQ to REG_OP
-        cpu_exec
-
-        jump_if_not label:write_difference
-
-        copy var:block to REG_A
-        write OP_INCR to REG_OP
-        cpu_exec
-
-        copy REG_RES to var:block
-        jump label:find_difference
-
-    label write_difference
-        write "Difference on line " to DISPLAY_BUFFER
-        write COLOR_BLUE to DISPLAY_COLOR
-        write OP_DISPLAY to REG_OP
-        cpu_exec
-
-        copy var:block to DISPLAY_BUFFER
-        write COLOR_BLUE to DISPLAY_COLOR
-        write OP_DISPLAY to REG_OP
-        cpu_exec
-
-        copy var:file1 to REG_A
-        copy PROGRAM_COUNTER to var:sys_return
-        jump label:sys_fs_close
-
-        copy var:file2 to REG_A
-        copy PROGRAM_COUNTER to var:sys_return
-        jump label:sys_fs_close
-        jump label:kernel_start
-
-    label difference_error
-        copy REG_ERROR to DISPLAY_BUFFER
-        write COLOR_RED to DISPLAY_COLOR
-        write OP_DISPLAY_LN to REG_OP
-        cpu_exec
-        jump label:kernel_start
+label validate_command
+    jump label:startValidation
 
 label kernel_end
     copy REG_ERROR to DISPLAY_BUFFER
