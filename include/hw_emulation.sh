@@ -58,6 +58,17 @@ function copy_from_to_address {
     fi
 }
 
+# Copy value from one address to another in RAM
+# INPUT: source address, destination address, number of lines to copy
+function copy_from_to_n_address {
+    local SOURCE_ADDRESS="$1"
+    local DESTINATION_ADDRESS="$2"
+    local NUMBER_OF_LINES="$3"
+    for (( i = 0; i < $NUMBER_OF_LINES; i++ )); do
+        write_to_address $(($DESTINATION_ADDRESS + i)) "$(read_from_address $(($SOURCE_ADDRESS + i)))"
+    done
+}
+
 function get_background_color {
     case $1 in
         g|${COLOR_GREEN})       echo "\\e[42m";;
@@ -68,6 +79,10 @@ function get_background_color {
         m|${COLOR_MAGENTA})     echo "\\e[45m";;
         c|${COLOR_CYAN})        echo "\\e[46m";;
         w|${COLOR_WHITE})       echo "\\e[47m";;
+        G|${COLOR_GRAY})        echo "\\e[48;2;51;51;51m";;
+        a|${COLOR_LIGHT_GRAY})  echo "\\e[48;2;102;102;102m";;
+        d|${COLOR_LIGHTER_GRAY})echo "\\e[48;2;153;153;153m";;
+        h|${COLOR_HUMAN})       echo "\\e[48;2;255;203;153m";;
         *)                      echo "\\e[0m";;
     esac
 }
@@ -232,6 +247,22 @@ function cpu_exec {
                     START_COLOR="\033[97m"
                     END_COLOR="\033[0m"
                     ;;
+                $COLOR_GRAY)
+                    START_COLOR="\033[38;2;51;51;51m"
+                    END_COLOR="\033[0m"
+                    ;;
+                $COLOR_LIGHT_GRAY)
+                    START_COLOR="\033[38;2;102;102;102m"
+                    END_COLOR="\033[0m"
+                    ;;
+                $COLOR_LIGHTER_GRAY)
+                    START_COLOR="\033[38;2;153;153;153m"
+                    END_COLOR="\033[0m"
+                    ;;
+                $COLOR_HUMAN)
+                    START_COLOR="\033[38;2;255;203;153m"
+                    END_COLOR="\033[0m"
+                    ;;
                 *)
                     START_COLOR=""
                     END_COLOR=""
@@ -292,7 +323,7 @@ function cpu_exec {
                 local CUR_BITMAP_LINE=$(read_from_address $(($i)))
                 RES_STR="$RES_STR${CUR_BITMAP_LINE}\n"
             done
-            RES_STR="$(echo "$RES_STR" | sed -e 's,m,\\e[45m ,g' -e 's,g,\\e[42m ,g' -e 's,y,\\e[43m ,g' -e 's,r,\\e[41m ,g' -e 's,B,\\e[40m ,g' -e 's,b,\\e[44m ,g' -e 's,c,\\e[46m ,g' -e 's,w,\\e[47m ,g')$BG_COLOR"
+            RES_STR="$(echo "$RES_STR" | sed -e 's,m,\\e[45m ,g' -e 's,g,\\e[42m ,g' -e 's,y,\\e[43m ,g' -e 's,r,\\e[41m ,g' -e 's,B,\\e[40m ,g' -e 's,b,\\e[44m ,g' -e 's,c,\\e[46m ,g' -e 's,w,\\e[47m ,g' -e 's,G,\\e[48;2;51;51;51m ,g' -e 's,a,\\e[48;2;102;102;102m ,g' -e 's,d,\\e[48;2;153;153;153m ,g' -e 's,h,\\e[48;2;255;203;153m ,g')$BG_COLOR"
             clear
             echo -e "$RES_STR"
             ;;
