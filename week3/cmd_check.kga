@@ -1,0 +1,57 @@
+label programStart
+    write "Enter commands: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+    copy KEYBOARD_BUFFER to FREE_MEMORY_START
+
+label promptCommand
+    write "Enter: " to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    write OP_READ_INPUT to REG_OP
+    cpu_exec
+
+    copy KEYBOARD_BUFFER to REG_A
+    write "1" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+
+    write "exit" to REG_A
+    copy REG_RES to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+
+    jump_if label:programExit
+    copy FREE_MEMORY_START to REG_A
+    copy REG_RES to REG_B
+    write OP_CONTAINS to REG_OP
+    cpu_exec
+
+    jump_if label:correctCommand
+    jump label:wrongCommand
+
+label wrongCommand
+    write "Error" to DISPLAY_BUFFER
+    write COLOR_RED to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    jump label:promptCommand
+
+label correctCommand
+    copy REG_RES to DISPLAY_BUFFER
+    write COLOR_GREEN to DISPLAY_COLOR
+    write OP_DISPLAY_LN to REG_OP
+    cpu_exec
+
+    jump label:promptCommand
+
+label programExit
+    write OP_HALT to REG_OP
+    cpu_exec

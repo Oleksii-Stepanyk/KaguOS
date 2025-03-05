@@ -1,0 +1,12 @@
+[Unit]
+Description=Noble service
+After=bionic.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/noble.sh
+
+[Install]
+WantedBy=multi-user.target

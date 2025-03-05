@@ -1,0 +1,10 @@
+[Unit]
+Description=Bionic service
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/bionic.sh
+[Install]
+WantedBy=multi-user.target

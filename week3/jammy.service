@@ -1,0 +1,11 @@
+[Unit]
+Description=Jammy service
+After=noble.service
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/usr/bin/jammy.sh
+[Install]
+WantedBy=multi-user.target

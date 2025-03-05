@@ -1,0 +1,9 @@
+[Unit]
+Description=Quantum service
+Requires=network.target myCoolTarget.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+ExecStart="/usr/bin/weather.sh"
+[Install]
+WantedBy=multi-user.target
