@@ -16,8 +16,8 @@ clear 7 7 7 user user BLOCKS 262 275
 debug 7 7 7 user user BLOCKS 276 320
 sleep 7 7 7 user user BLOCKS 321 335
 user_sched 7 7 7 user group BLOCKS 336 395
-
-
+tail 7 7 7 user user BLOCKS 784 895
+head 7 7 7 user user BLOCKS 896 999
 
 
 
@@ -781,225 +781,224 @@ Program loaded with PID
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1 6 125        #  copy REG_B => var:input_file
+1 4 126        #  copy REG_A => var:line_count
+1 125 4        #  copy var:input_file => REG_A
+1 103 6        #  write "" => REG_B
+1 104 2        #  write OP_CMP_EQ => REG_OP
+0              #  cpu_exec
+4 99           #  jump_if lbl:exit_error
+1 126 4        #  copy var:line_count => REG_A
+1 103 6        #  write "" => REG_B
+1 104 2        #  write OP_CMP_EQ => REG_OP
+0              #  cpu_exec
+4 99           #  jump_if lbl:exit_error
+1 126 4        #  copy var:line_count => REG_A
+1 105 6        #  write "-" => REG_B
+1 106 2        #  write OP_STARTS_WITH => REG_OP
+0              #  cpu_exec
+5 99           #  jump_if_not lbl:exit_error
+1 126 4        #  copy var:line_count => REG_A
+1 107 6        #  write "1" => REG_B
+1 103 8        #  write "" => REG_C
+1 108 2        #  write OP_REPLACE_COLUMN => REG_OP
+0              #  cpu_exec
+1 12 126       #  copy REG_RES => var:line_count
+1 126 4        #  copy var:line_count => REG_A
+1 109 2        #  write OP_IS_NUM => REG_OP
+0              #  cpu_exec
+5 99           #  jump_if_not lbl:exit_error
+1 125 4        #  copy var:input_file => REG_A
+1 110 10       #  write SYS_CALL_OPEN => REG_D
+1 111 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 99           #  jump_err lbl:exit_error
+1 12 128       #  copy REG_RES => var:fd
+1 128 4        #  copy var:fd => REG_A
+1 112 10       #  write SYS_CALL_DESCRIPTOR_INFO => REG_D
+1 111 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 99           #  jump_err lbl:exit_error
+1 12 4         #  copy REG_RES => REG_A
+1 113 6        #  write "4" => REG_B
+1 114 8        #  write " " => REG_C
+1 115 2        #  write OP_GET_COLUMN => REG_OP
+0              #  cpu_exec
+1 12 127       #  copy REG_RES => var:counter
+1 127 4        #  copy var:counter => REG_A
+1 126 6        #  copy var:line_count => REG_B
+1 116 2        #  write OP_CMP_LE => REG_OP
+0              #  cpu_exec
+5 67           #  jump_if_not lbl:validate_continue
+1 127 126      #  copy var:counter => var:line_count
+1 127 4        #  copy var:counter => REG_A
+1 126 6        #  copy var:line_count => REG_B
+1 117 2        #  write OP_SUB => REG_OP
+0              #  cpu_exec
+1 12 126       #  copy REG_RES => var:line_count
+1 126 4        #  copy var:line_count => REG_A
+1 118 2        #  write OP_INCR => REG_OP
+0              #  cpu_exec
+1 12 126       #  copy REG_RES => var:line_count
+1 128 4        #  copy var:fd => REG_A
+1 126 6        #  copy var:line_count => REG_B
+1 119 10       #  write SYS_CALL_READ => REG_D
+1 111 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 12 4         #  copy REG_RES => REG_A
+1 120 6        #  write COLOR_GREEN => REG_B
+1 121 10       #  write SYS_CALL_PRINTLN => REG_D
+1 111 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 126 4        #  copy var:line_count => REG_A
+1 118 2        #  write OP_INCR => REG_OP
+0              #  cpu_exec
+1 12 126       #  copy REG_RES => var:line_count
+1 126 4        #  copy var:line_count => REG_A
+1 127 6        #  copy var:counter => REG_B
+1 116 2        #  write OP_CMP_LE => REG_OP
+0              #  cpu_exec
+4 76           #  jump_if lbl:print_content_loop
+1 122 4        #  write "0" => REG_A
+1 123 10       #  write SYS_CALL_EXIT => REG_D
+1 111 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 124 4        #  write "1" => REG_A
+1 123 10       #  write SYS_CALL_EXIT => REG_D
+1 111 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+
+8
+-
+14
+1
+16
+7
+4
+25
+5
+4
+ 
+15
+11
+1
+2
+7
+1
+1
+0
+0
+1
+
+
+
+
+1 96 119       #  write "1" => var:counter
+1 6 117        #  copy REG_B => var:input_file
+1 4 118        #  copy REG_A => var:line_count
+1 117 4        #  copy var:input_file => REG_A
+1 97 6         #  write "" => REG_B
+1 98 2         #  write OP_CMP_EQ => REG_OP
+0              #  cpu_exec
+4 92           #  jump_if lbl:exit_error
+1 118 4        #  copy var:line_count => REG_A
+1 97 6         #  write "" => REG_B
+1 98 2         #  write OP_CMP_EQ => REG_OP
+0              #  cpu_exec
+4 92           #  jump_if lbl:exit_error
+1 118 4        #  copy var:line_count => REG_A
+1 99 6         #  write "-" => REG_B
+1 100 2        #  write OP_STARTS_WITH => REG_OP
+0              #  cpu_exec
+5 92           #  jump_if_not lbl:exit_error
+1 118 4        #  copy var:line_count => REG_A
+1 96 6         #  write "1" => REG_B
+1 97 8         #  write "" => REG_C
+1 101 2        #  write OP_REPLACE_COLUMN => REG_OP
+0              #  cpu_exec
+1 12 118       #  copy REG_RES => var:line_count
+1 118 4        #  copy var:line_count => REG_A
+1 102 2        #  write OP_IS_NUM => REG_OP
+0              #  cpu_exec
+5 92           #  jump_if_not lbl:exit_error
+1 117 4        #  copy var:input_file => REG_A
+1 103 10       #  write SYS_CALL_OPEN => REG_D
+1 104 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 92           #  jump_err lbl:exit_error
+1 12 120       #  copy REG_RES => var:fd
+1 120 4        #  copy var:fd => REG_A
+1 105 10       #  write SYS_CALL_DESCRIPTOR_INFO => REG_D
+1 104 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 92           #  jump_err lbl:exit_error
+1 12 4         #  copy REG_RES => REG_A
+1 106 6        #  write "4" => REG_B
+1 107 8        #  write " " => REG_C
+1 108 2        #  write OP_GET_COLUMN => REG_OP
+0              #  cpu_exec
+1 12 119       #  copy REG_RES => var:counter
+1 119 4        #  copy var:counter => REG_A
+1 118 6        #  copy var:line_count => REG_B
+1 109 2        #  write OP_CMP_LE => REG_OP
+0              #  cpu_exec
+5 68           #  jump_if_not lbl:validate_continue
+1 119 118      #  copy var:counter => var:line_count
+1 96 119       #  write "1" => var:counter
+1 120 4        #  copy var:fd => REG_A
+1 119 6        #  copy var:counter => REG_B
+1 110 10       #  write SYS_CALL_READ => REG_D
+1 104 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 12 4         #  copy REG_RES => REG_A
+1 111 6        #  write COLOR_GREEN => REG_B
+1 112 10       #  write SYS_CALL_PRINTLN => REG_D
+1 104 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 119 4        #  copy var:counter => REG_A
+1 113 2        #  write OP_INCR => REG_OP
+0              #  cpu_exec
+1 12 119       #  copy REG_RES => var:counter
+1 119 4        #  copy var:counter => REG_A
+1 118 6        #  copy var:line_count => REG_B
+1 109 2        #  write OP_CMP_LE => REG_OP
+0              #  cpu_exec
+4 69           #  jump_if lbl:print_content_loop
+1 114 4        #  write "0" => REG_A
+1 115 10       #  write SYS_CALL_EXIT => REG_D
+1 104 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 116 4        #  write "1" => REG_A
+1 115 10       #  write SYS_CALL_EXIT => REG_D
+1 104 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1
+
+8
+-
+14
+16
+7
+4
+25
+5
+4
+ 
+15
+11
+7
+1
+1
+2
+0
+0
+1
 
 
 
 
 
 FS_HEADER kagu_fs FIRST_USABLE_BLOCK 1021 LAST_USABLE_BLOCK 1500
-
 
 
 
@@ -1820,46 +1819,6 @@ FS_HEADER kagu_fs FIRST_USABLE_BLOCK 1822 LAST_USABLE_BLOCK 2048
 
 
 FS_HEADER_END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

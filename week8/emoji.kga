@@ -1,0 +1,27 @@
+var char
+label emoji_input
+    write KEYBOARD_READ_CHAR_SILENTLY to REG_A
+    write SYS_CALL_READ_INPUT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:char
+
+    copy var:char to REG_A
+    write "q" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:emoji_exit
+
+    copy var:char to REG_A
+    write SYS_CALL_EMOJI to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    jump label:emoji_input
+
+label emoji_exit
+    write 0 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec

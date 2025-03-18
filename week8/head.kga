@@ -1,0 +1,107 @@
+var input_file
+var line_count
+var counter
+var fd
+
+write "1" to var:counter
+copy REG_B to var:input_file
+copy REG_A to var:line_count
+
+label validate_input
+    // Validation of inputs
+    copy var:input_file to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:exit_error
+
+    copy var:line_count to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:exit_error
+
+    copy var:line_count  to REG_A
+    write "-" to REG_B
+    write OP_STARTS_WITH to REG_OP
+    cpu_exec
+    jump_if_not label:exit_error
+
+    copy var:line_count to REG_A
+    write "1" to REG_B
+    write "" to REG_C
+    write OP_REPLACE_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:line_count
+
+    copy var:line_count to REG_A
+    write OP_IS_NUM to REG_OP
+    cpu_exec
+    jump_if_not label:exit_error
+
+    copy var:input_file to REG_A
+    write SYS_CALL_OPEN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:exit_error
+    copy REG_RES to var:fd
+
+    copy var:fd to REG_A
+    write SYS_CALL_DESCRIPTOR_INFO to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:exit_error
+    // End validation
+    copy REG_RES to REG_A
+    write "4" to REG_B
+    write " " to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:counter // File size
+    // If file size less that line count, print all lines
+    copy var:counter to REG_A
+    copy var:line_count to REG_B
+    write OP_CMP_LE to REG_OP
+    cpu_exec
+    jump_if_not label:validate_continue
+
+    copy var:counter to var:line_count // Make them even
+
+label validate_continue
+    write "1" to var:counter
+
+label print_content_loop
+    copy var:fd to REG_A
+    copy var:counter to REG_B
+    write SYS_CALL_READ to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write COLOR_GREEN to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy var:counter to REG_A
+    write OP_INCR to REG_OP
+    cpu_exec
+    copy REG_RES to var:counter
+
+    copy var:counter to REG_A
+    copy var:line_count to REG_B
+    write OP_CMP_LE to REG_OP
+    cpu_exec
+    jump_if label:print_content_loop
+
+label exit
+    write 0 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label exit_error
+    write 1 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec

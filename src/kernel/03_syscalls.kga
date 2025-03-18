@@ -32,7 +32,7 @@ var sys_call_11
 var sys_call_12
 var sys_call_13
 var sys_call_14
-
+var sys_call_15
 
 label sys_call_handler
     var sys_call_arg1
@@ -89,7 +89,6 @@ label unknown_sys_call
 label sys_call_to_user_mode
     write OP_SYS_RETURN to REG_OP
     cpu_exec
-
 
 // SYSTEM CALLS IMPLEMENTATION START
 label sys_call_exit
@@ -216,7 +215,66 @@ label sys_call_render_bitmap
     cpu_exec
     jump label:sys_call_to_user_mode
 
+label sys_call_emoji
+    // Happy face
+    write "ccccccccccyyyyyyyyyyyycccccccccc" to 2017
+    write "ccccccyyyyyyyyyyyyyyyyyyyycccccc" to 2018
+    write "ccccyyyyyyyyyyyyyyyyyyyyyyyycccc" to 2019
+    write "ccyyyyyyyyyyyyyyyyyyyyyyyyyyyycc" to 2020
+    write "ccyyyyyyyyBByyyyyyyyBByyyyyyyycc" to 2021
+    write "yyyyyyyyBBBBBByyyyBBBBBByyyyyyyy" to 2022
+    write "yyyyyyyyBByyBByyyyBByyBByyyyyyyy" to 2023
+    write "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" to 2024
+    write "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" to 2025
+    write "yyyyyyyyBByyyyyyyyyyyyBByyyyyyyy" to 2026
+    write "yyyyyyyyyyBBBBBBBBBBBByyyyyyyyyy" to 2027
+    write "ccyyyyyyyyyyyyyyyyyyyyyyyyyyyycc" to 2028
+    write "ccyyyyyyyyyyyyyyyyyyyyyyyyyyyycc" to 2029
+    write "ccccyyyyyyyyyyyyyyyyyyyyyyyycccc" to 2030
+    write "ccccccyyyyyyyyyyyyyyyyyyyycccccc" to 2031
+    write "ccccccccccyyyyyyyyyyyycccccccccc" to 2032
+    // Sad face
+    write "ccccccccccyyyyyyyyyyyycccccccccc" to 2033
+    write "ccccccyyyyyyyyyyyyyyyyyyyycccccc" to 2034
+    write "ccccyyyyyyyyyyyyyyyyyyyyyyyycccc" to 2035
+    write "ccyyyyyyyyyyyyyyyyyyyyyyyyyyyycc" to 2036
+    write "ccyyyyyyyyBByyyyyyyyBByyyyyyyycc" to 2037
+    write "yyyyyyyyBBBByyyyyyyyBBBByyyyyyyy" to 2038
+    write "yyyyyyyyBBBByyyyyyyyBBBByyyyyyyy" to 2039
+    write "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" to 2040
+    write "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" to 2041
+    write "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy" to 2042
+    write "yyyyyyyyyyBBBBBBBBBBBByyyyyyyyyy" to 2043
+    write "ccyyyyyyBByyyyyyyyyyyyBByyyyyycc" to 2044
+    write "ccyyyyyyyyyyyyyyyyyyyyyyyyyyyycc" to 2045
+    write "ccccyyyyyyyyyyyyyyyyyyyyyyyycccc" to 2046
+    write "ccccccyyyyyyyyyyyyyyyyyyyycccccc" to 2047
+    write "ccccccccccyyyyyyyyyyyycccccccccc" to 2048
 
+    write COLOR_CYAN to DISPLAY_BACKGROUND
+    write OP_SET_BACKGROUND_COLOR to REG_OP
+    cpu_exec
+
+    copy var:sys_call_arg1 to REG_A
+    write "1" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:sys_call_emoji_happy
+    jump label:sys_call_emoji_sad
+
+    label sys_call_emoji_happy
+        write 2017 to REG_A
+        write 2033 to REG_B
+        write OP_RENDER_BITMAP to REG_OP
+        cpu_exec
+        jump label:sys_call_to_user_mode
+
+    label sys_call_emoji_sad
+        write 2033 to REG_A
+        write 2049 to REG_B
+        write OP_RENDER_BITMAP to REG_OP
+        cpu_exec
+        jump label:sys_call_to_user_mode
 
 label sys_call_sleep
     copy var:sys_call_arg1 to REG_A
@@ -277,4 +335,5 @@ label sys_call_table_init
     write label:sys_call_get_file_attr to var:sys_call_12
     write label:sys_call_set_file_attr to var:sys_call_13
     write label:sys_call_sched_program to var:sys_call_14
+    write label:sys_call_emoji to var:sys_call_15
     jump label:sys_stack_pop
