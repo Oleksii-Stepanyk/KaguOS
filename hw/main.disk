@@ -18,9 +18,9 @@ sleep 7 7 7 user user BLOCKS 321 335
 user_sched 7 7 7 user group BLOCKS 336 395
 tail 7 7 7 user user BLOCKS 784 895
 head 7 7 7 user user BLOCKS 896 999
-
-
-
+producer 7 7 7 user user BLOCKS 396 475
+hello 7 7 7 user user BLOCKS 476 559
+interpreter 7 7 7 user user BLOCKS 560 622
 
 
 
@@ -28,8 +28,8 @@ head 7 7 7 user user BLOCKS 896 999
 
 
 FS_HEADER_END
-proc_memory 250     // memory allocated for one process
-max_proc_count 10   // max count of active processes
+proc_memory 500     // memory allocated for one process
+max_proc_count 20   // max count of active processes
 max_fd_count 50     // max count of files open at the same time
 
 
@@ -98,16 +98,16 @@ max_fd_count 50     // max count of files open at the same time
 
 
 
-Some line 1
-Line 2
-Another line
-Just for test
-Ok
-That's it
-Text
-Other Text
-One more Text
-The end
+clear
+mario 5
+head -5 mario
+cat 1.txt
+sleep 5
+tail -10 producer
+cat config.txt
+head -20 head
+cat 1.txt
+sleep 5
 1 4 166        #  copy REG_A => var:iterations
 1 126 4        #  write COLOR_CYAN => REG_A
 1 127 10       #  write SYS_CALL_SET_BACKGROUND => REG_D
@@ -393,229 +393,229 @@ Program loaded with PID
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1 76 4         #  write "1.txt" => REG_A
+1 77 10        #  write SYS_CALL_OPEN => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 67           #  jump_err lbl:error
+1 12 94        #  copy REG_RES => var:fd
+1 79 4         #  write "Enter name: " => REG_A
+1 80 10        #  write SYS_CALL_PRINT => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 81 10        #  write SYS_CALL_READ_INPUT => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 12 95        #  copy REG_RES => var:name
+1 82 4         #  write "Enter age: " => REG_A
+1 80 10        #  write SYS_CALL_PRINT => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 81 10        #  write SYS_CALL_READ_INPUT => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 12 96        #  copy REG_RES => var:age
+1 94 4         #  copy var:fd => REG_A
+1 83 6         #  write "1" => REG_B
+1 95 8         #  copy var:name => REG_C
+1 84 10        #  write SYS_CALL_WRITE => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 67           #  jump_err lbl:error
+1 94 4         #  copy var:fd => REG_A
+1 85 6         #  write "2" => REG_B
+1 96 8         #  copy var:age => REG_C
+1 84 10        #  write SYS_CALL_WRITE => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 67           #  jump_err lbl:error
+1 94 4         #  copy var:fd => REG_A
+1 86 10        #  write SYS_CALL_CLOSE => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 67           #  jump_err lbl:error
+1 87 4         #  write "hello" => REG_A
+1 83 6         #  write "1" => REG_B
+1 88 10        #  write SYS_CALL_SCHED_PROGRAM => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 89 4         #  write "0" => REG_A
+1 90 10        #  write SYS_CALL_EXIT => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 91 4         #  write "Error" => REG_A
+1 92 6         #  write COLOR_RED => REG_B
+1 84 10        #  write SYS_CALL_WRITE => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 93 4         #  write "1" => REG_A
+1 90 10        #  write SYS_CALL_EXIT => REG_D
+1 78 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1.txt
+4
+25
+Enter name: 
+2
+3
+Enter age: 
+1
+8
+2
+6
+hello
+14
+0
+0
+Error
+3
+1
+
+
+
+1 78 4         #  write "1.txt" => REG_A
+1 79 10        #  write SYS_CALL_OPEN => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 69           #  jump_err lbl:error
+1 12 98        #  copy REG_RES => var:fd
+1 81 4         #  write "Hello, " => REG_A
+1 82 6         #  write COLOR_GREEN => REG_B
+1 83 10        #  write SYS_CALL_PRINT => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 98 4         #  copy var:fd => REG_A
+1 84 6         #  write "1" => REG_B
+1 85 10        #  write SYS_CALL_READ => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 69           #  jump_err lbl:error
+1 12 4         #  copy REG_RES => REG_A
+1 86 6         #  write COLOR_YELLOW => REG_B
+1 83 10        #  write SYS_CALL_PRINT => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 87 4         #  write " with the age of " => REG_A
+1 82 6         #  write COLOR_GREEN => REG_B
+1 83 10        #  write SYS_CALL_PRINT => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 98 4         #  copy var:fd => REG_A
+1 88 6         #  write "2" => REG_B
+1 85 10        #  write SYS_CALL_READ => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 69           #  jump_err lbl:error
+1 12 4         #  copy REG_RES => REG_A
+1 86 6         #  write COLOR_YELLOW => REG_B
+1 83 10        #  write SYS_CALL_PRINT => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 89 4         #  write " years." => REG_A
+1 82 6         #  write COLOR_GREEN => REG_B
+1 90 10        #  write SYS_CALL_PRINTLN => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 98 4         #  copy var:fd => REG_A
+1 91 10        #  write SYS_CALL_CLOSE => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 69           #  jump_err lbl:error
+1 92 4         #  write "0" => REG_A
+1 93 10        #  write SYS_CALL_EXIT => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 94 4         #  write "Error" => REG_A
+1 95 6         #  write COLOR_RED => REG_B
+1 96 10        #  write SYS_CALL_WRITE => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 97 4         #  write "1" => REG_A
+1 93 10        #  write SYS_CALL_EXIT => REG_D
+1 80 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1.txt
+4
+25
+Hello, 
+1
+2
+1
+7
+2
+ with the age of 
+2
+ years.
+1
+6
+0
+0
+Error
+3
+8
+1
+
+
+
+1 62 77        #  write "1" => var:ptr
+1 62 79        #  write "1" => var:priority
+1 4 4          #  copy REG_A => REG_A
+1 63 10        #  write SYS_CALL_OPEN => REG_D
+1 64 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 53           #  jump_err lbl:error
+1 12 76        #  copy REG_RES => var:fd
+1 76 4         #  copy var:fd => REG_A
+1 77 6         #  copy var:ptr => REG_B
+1 65 10        #  write SYS_CALL_READ => REG_D
+1 64 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 12 78        #  copy REG_RES => var:program
+1 16 4         #  copy REG_ERROR => REG_A
+1 66 6         #  write "EOF" => REG_B
+1 67 2         #  write OP_CMP_EQ => REG_OP
+0              #  cpu_exec
+4 49           #  jump_if lbl:exit
+6 53           #  jump_err lbl:error
+1 78 4         #  copy var:program => REG_A
+1 79 6         #  copy var:priority => REG_B
+1 68 10        #  write SYS_CALL_SCHED_PROGRAM => REG_D
+1 64 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 53           #  jump_err lbl:error
+1 77 4         #  copy var:ptr => REG_A
+1 69 2         #  write OP_INCR => REG_OP
+0              #  cpu_exec
+1 12 77        #  copy REG_RES => var:ptr
+1 12 79        #  copy REG_RES => var:priority
+3 25           #  jump lbl:main
+1 70 4         #  write "0" => REG_A
+1 71 10        #  write SYS_CALL_EXIT => REG_D
+1 64 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 72 4         #  write "Error" => REG_A
+1 73 6         #  write COLOR_RED => REG_B
+1 74 10        #  write SYS_CALL_PRINTLN => REG_D
+1 64 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 75 4         #  write "1" => REG_A
+1 71 10        #  write SYS_CALL_EXIT => REG_D
+1 64 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1
+4
+25
+7
+EOF
+8
+14
+2
+0
+0
+Error
+3
+1
+1
 
 
 
