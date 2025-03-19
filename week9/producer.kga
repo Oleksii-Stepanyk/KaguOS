@@ -1,0 +1,79 @@
+var fd
+var name
+var age
+
+write "1.txt" to REG_A
+write SYS_CALL_OPEN to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec
+jump_err label:error
+copy REG_RES to var:fd
+
+label main
+    write "Enter name: " to REG_A
+    write SYS_CALL_PRINT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write SYS_CALL_READ_INPUT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:name
+
+    write "Enter age: " to REG_A
+    write SYS_CALL_PRINT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write SYS_CALL_READ_INPUT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy REG_RES to var:age
+
+    copy var:fd to REG_A
+    write "1" to REG_B
+    copy var:name to REG_C
+    write SYS_CALL_WRITE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy var:fd to REG_A
+    write "2" to REG_B
+    copy var:age to REG_C
+    write SYS_CALL_WRITE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy var:fd to REG_A
+    write SYS_CALL_CLOSE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write "hello" to REG_A
+    write "1" to REG_B
+    write SYS_CALL_SCHED_PROGRAM to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label exit
+    write 0 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label error
+    write "Error" to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_WRITE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write 1 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
