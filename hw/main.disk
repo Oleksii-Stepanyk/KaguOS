@@ -999,10 +999,10 @@ Error
 
 
 FS_HEADER kagu_fs FIRST_USABLE_BLOCK 1021 LAST_USABLE_BLOCK 1500
-
-
-
-
+socket.txt 7 7 7 user user BLOCKS 1021 1028
+test_socket 7 7 7 user user BLOCKS 1029 1159
+handler 7 7 7 user user BLOCKS 1160 1303
+kill_process 7 7 7 user user BLOCKS 1304 1390
 
 
 
@@ -1018,375 +1018,375 @@ FS_HEADER kagu_fs FIRST_USABLE_BLOCK 1021 LAST_USABLE_BLOCK 1500
 
 
 FS_HEADER_END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ERROR
+nnnnnnn
+nnngnnn
+nnggnnn
+ngngnnn
+nnngnnn
+nnngnnn
+nnnnnnn
+1 114 4        #  write "socket.txt" => REG_A
+1 115 10       #  write SYS_CALL_OPEN => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 147       #  copy REG_RES => var:fd
+1 117 10       #  write SYS_CALL_READ_INPUT => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 118 4        #  write "GET" => REG_A
+1 12 6         #  copy REG_RES => REG_B
+1 119 8        #  write " " => REG_C
+1 120 2        #  write OP_CONCAT_WITH => REG_OP
+0              #  cpu_exec
+1 147 4        #  copy var:fd => REG_A
+1 121 6        #  write "1" => REG_B
+1 12 8         #  copy REG_RES => REG_C
+1 122 10       #  write SYS_CALL_WRITE => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 123 4        #  write "handler" => REG_A
+1 124 6        #  write "50" => REG_B
+1 125 10       #  write SYS_CALL_SCHED_PROGRAM => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 126 10       #  write SYS_CALL_WAIT_SCHED => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 147 4        #  copy var:fd => REG_A
+1 121 6        #  write "1" => REG_B
+1 127 10       #  write SYS_CALL_READ => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 4         #  copy REG_RES => REG_A
+1 128 6        #  write "OK" => REG_B
+1 129 2        #  write OP_CMP_EQ => REG_OP
+0              #  cpu_exec
+5 105          #  jump_if_not lbl:error
+1 147 4        #  copy var:fd => REG_A
+1 130 6        #  write "2" => REG_B
+1 127 10       #  write SYS_CALL_READ => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 190       #  copy REG_RES => 190
+1 131 6        #  write "3" => REG_B
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 191       #  copy REG_RES => 191
+1 132 6        #  write "4" => REG_B
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 192       #  copy REG_RES => 192
+1 133 6        #  write "5" => REG_B
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 193       #  copy REG_RES => 193
+1 134 6        #  write "6" => REG_B
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 194       #  copy REG_RES => 194
+1 135 6        #  write "7" => REG_B
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 195       #  copy REG_RES => 195
+1 136 6        #  write "8" => REG_B
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 12 196       #  copy REG_RES => 196
+1 137 4        #  write "190" => REG_A
+1 138 6        #  write "197" => REG_B
+1 139 10       #  write SYS_CALL_RENDER_BITMAP => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 147 4        #  copy var:fd => REG_A
+1 140 10       #  write SYS_CALL_CLOSE => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 105          #  jump_err lbl:error
+1 141 4        #  write "0" => REG_A
+1 142 10       #  write SYS_CALL_EXIT => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 143 4        #  write "Error occured" => REG_A
+1 144 6        #  write COLOR_RED => REG_B
+1 145 10       #  write SYS_CALL_PRINTLN => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 146 4        #  write "1" => REG_A
+1 142 10       #  write SYS_CALL_EXIT => REG_D
+1 116 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+socket.txt
+4
+25
+3
+GET
+ 
+17
+1
+8
+handler
+50
+14
+18
+7
+OK
+8
+2
+3
+4
+5
+6
+7
+8
+190
+197
+10
+6
+0
+0
+Error occured
+3
+1
+1
+
+1 128 4        #  write "socket.txt" => REG_A
+1 129 10       #  write SYS_CALL_OPEN => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 12 160       #  copy REG_RES => var:fd
+1 160 4        #  copy var:fd => REG_A
+1 131 6        #  write "1" => REG_B
+1 132 10       #  write SYS_CALL_READ => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 12 4         #  copy REG_RES => REG_A
+1 133 6        #  write "GET 1" => REG_B
+1 134 2        #  write OP_CMP_EQ => REG_OP
+0              #  cpu_exec
+4 77           #  jump_if lbl:write_1
+1 135 6        #  write "GET 0" => REG_B
+0              #  cpu_exec
+4 45           #  jump_if lbl:write_0
+1 160 4        #  copy var:fd => REG_A
+1 131 6        #  write "1" => REG_B
+1 136 8        #  write "ERROR" => REG_C
+1 137 10       #  write SYS_CALL_WRITE => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+3 110          #  jump lbl:exit
+1 160 4        #  copy var:fd => REG_A
+1 131 6        #  write "1" => REG_B
+1 138 8        #  write "OK" => REG_C
+1 137 10       #  write SYS_CALL_WRITE => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 139 6        #  write "2" => REG_B
+1 140 8        #  write "nnrrnnn" => REG_C
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 141 6        #  write "8" => REG_B
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 142 6        #  write "3" => REG_B
+1 143 8        #  write "nrrrrnn" => REG_C
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 144 6        #  write "7" => REG_B
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 145 6        #  write "4" => REG_B
+1 146 8        #  write "rnnnnrn" => REG_C
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 147 6        #  write "5" => REG_B
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 148 6        #  write "6" => REG_B
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+3 110          #  jump lbl:exit
+1 160 4        #  copy var:fd => REG_A
+1 131 6        #  write "1" => REG_B
+1 138 8        #  write "OK" => REG_C
+1 137 10       #  write SYS_CALL_WRITE => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 139 6        #  write "2" => REG_B
+1 149 8        #  write "nnnnnnn" => REG_C
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 141 6        #  write "8" => REG_B
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 142 6        #  write "3" => REG_B
+1 150 8        #  write "nnngnnn" => REG_C
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 148 6        #  write "6" => REG_B
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 144 6        #  write "7" => REG_B
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 145 6        #  write "4" => REG_B
+1 151 8        #  write "nnggnnn" => REG_C
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 147 6        #  write "5" => REG_B
+1 152 8        #  write "ngngnnn" => REG_C
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+3 110          #  jump lbl:exit
+1 160 4        #  copy var:fd => REG_A
+1 153 10       #  write SYS_CALL_CLOSE => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 119          #  jump_err lbl:error
+1 154 4        #  write "0" => REG_A
+1 155 10       #  write SYS_CALL_EXIT => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 156 4        #  write "Error occured" => REG_A
+1 157 6        #  write COLOR_RED => REG_B
+1 158 10       #  write SYS_CALL_PRINTLN => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 159 4        #  write "1" => REG_A
+1 155 10       #  write SYS_CALL_EXIT => REG_D
+1 130 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+socket.txt
+4
+25
+1
+7
+GET 1
+8
+GET 0
+ERROR
+8
+OK
+2
+nnrrnnn
+8
+3
+nrrrrnn
+7
+4
+rnnnnrn
+5
+6
+nnnnnnn
+nnngnnn
+nnggnnn
+ngngnnn
+6
+0
+0
+Error occured
+3
+1
+1
+
+1 83 4         #  write "Enter filename: " => REG_A
+1 84 6         #  write COLOR_GREEN => REG_B
+1 85 10        #  write SYS_CALL_PRINT => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 87 10        #  write SYS_CALL_READ_INPUT => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 88 4         #  write "cat" => REG_A
+1 12 6         #  copy REG_RES => REG_B
+1 89 8         #  write " " => REG_C
+1 90 2         #  write OP_CONCAT_WITH => REG_OP
+0              #  cpu_exec
+1 12 4         #  copy REG_RES => REG_A
+1 91 10        #  write SYS_CALL_SCHED_PROGRAM => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 74           #  jump_err lbl:error
+1 12 103       #  copy REG_RES => var:pid
+1 92 10        #  write SYS_CALL_SKIP_SCHED => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 74           #  jump_err lbl:error
+1 92 10        #  write SYS_CALL_SKIP_SCHED => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 74           #  jump_err lbl:error
+1 92 10        #  write SYS_CALL_SKIP_SCHED => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 74           #  jump_err lbl:error
+1 103 4        #  copy var:pid => REG_A
+1 93 10        #  write SYS_CALL_IS_PROCESS_ACTIVE => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 65           #  jump_err lbl:ok
+3 54           #  jump lbl:kill
+1 94 4         #  write "No way. cat process was killed" => REG_A
+1 95 6         #  write COLOR_RED => REG_B
+1 96 10        #  write SYS_CALL_PRINTLN => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 103 4        #  copy var:pid => REG_A
+1 97 10        #  write SYS_CALL_KILL_PROCESS => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+6 74           #  jump_err lbl:error
+3 70           #  jump lbl:exit
+1 98 4         #  write "Ok" => REG_A
+1 84 6         #  write COLOR_GREEN => REG_B
+1 96 10        #  write SYS_CALL_PRINTLN => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 99 4         #  write "0" => REG_A
+1 100 10       #  write SYS_CALL_EXIT => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 101 4        #  write "Error occured" => REG_A
+1 95 6         #  write COLOR_RED => REG_B
+1 96 10        #  write SYS_CALL_PRINTLN => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 102 4        #  write "1" => REG_A
+1 100 10       #  write SYS_CALL_EXIT => REG_D
+1 86 2         #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+Enter filename: 
+1
+2
+25
+3
+cat
+ 
+17
+14
+17
+15
+No way. cat process was killed
+3
+1
+16
+Ok
+0
+0
+Error occured
+1
 
 
 
