@@ -1,0 +1,144 @@
+var fd
+
+label main
+    write "socket.txt" to REG_A
+    write SYS_CALL_OPEN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+    copy REG_RES to var:fd
+
+    copy var:fd to REG_A
+    write "1" to REG_B
+    write SYS_CALL_READ to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy REG_RES to REG_A
+    write "GET 1" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:write_1
+
+    write "GET 0" to REG_B
+    cpu_exec
+    jump_if label:write_0
+
+    copy var:fd to REG_A
+    write "1" to REG_B
+    write "ERROR" to REG_C
+    write SYS_CALL_WRITE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+    jump label:exit
+
+label write_0
+    copy var:fd to REG_A
+    write "1" to REG_B
+    write "OK" to REG_C
+    write SYS_CALL_WRITE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write "2" to REG_B
+    write "nnrrnnn" to REG_C
+    cpu_exec
+    jump_err label:error
+
+    write "8" to REG_B
+    cpu_exec
+    jump_err label:error
+
+    write "3" to REG_B
+    write "nrrrrnn" to REG_C
+    cpu_exec
+    jump_err label:error
+
+    write "7" to REG_B
+    cpu_exec
+    jump_err label:error
+
+    write "4" to REG_B
+    write "rnnnnrn" to REG_C
+    cpu_exec
+    jump_err label:error
+
+    write "5" to REG_B
+    cpu_exec
+    jump_err label:error
+
+    write "6" to REG_B
+    cpu_exec
+    jump_err label:error   
+
+    jump label:exit
+
+label write_1
+    copy var:fd to REG_A
+    write "1" to REG_B
+    write "OK" to REG_C
+    write SYS_CALL_WRITE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write "2" to REG_B
+    write "nnnnnnn" to REG_C
+    cpu_exec
+    jump_err label:error
+
+    write "8" to REG_B
+    cpu_exec
+    jump_err label:error
+
+    write "3" to REG_B
+    write "nnngnnn" to REG_C
+    cpu_exec
+    jump_err label:error
+
+    write "6" to REG_B
+    cpu_exec
+    jump_err label:error
+
+    write "7" to REG_B
+    cpu_exec
+    jump_err label:error
+
+    write "4" to REG_B
+    write "nnggnnn" to REG_C
+    cpu_exec
+    jump_err label:error
+
+    write "5" to REG_B
+    write "ngngnnn" to REG_C
+    cpu_exec
+    jump_err label:error 
+
+    jump label:exit
+
+label exit
+    copy var:fd to REG_A
+    write SYS_CALL_CLOSE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write 0 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label error
+    write "Error occured" to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write 1 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec    

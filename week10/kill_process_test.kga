@@ -1,0 +1,85 @@
+var pid
+
+label main
+    write "Enter filename: " to REG_A
+    write COLOR_GREEN to REG_B
+    write SYS_CALL_PRINT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write SYS_CALL_READ_INPUT to REG_D  
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write "cat" to REG_A
+    copy REG_RES to REG_B
+    write " " to REG_C
+    write OP_CONCAT_WITH to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write SYS_CALL_SCHED_PROGRAM to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+    copy REG_RES to var:pid
+    
+    write SYS_CALL_SKIP_SCHED to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write SYS_CALL_SKIP_SCHED to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write SYS_CALL_SKIP_SCHED to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    copy var:pid to REG_A
+    write SYS_CALL_IS_PROCESS_ACTIVE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:ok
+    jump label:kill
+
+label kill
+    write "No way. cat process was killed" to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy var:pid to REG_A
+    write SYS_CALL_KILL_PROCESS to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+    jump label:exit
+
+label ok
+    write "Ok" to REG_A
+    write COLOR_GREEN to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label exit
+    write 0 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+label error
+    write "Error occured" to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write 1 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec    

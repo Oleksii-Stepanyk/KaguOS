@@ -1,0 +1,84 @@
+// INCOMPLETE VERSION OF INTERPRETER FROM WEEK 10
+var fd
+var ptr
+var program
+var priority
+write "1" to var:ptr
+write "0" to var:priority
+
+copy REG_A to REG_A
+write SYS_CALL_OPEN to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec
+jump_err label:error
+copy REG_RES to var:fd
+
+label main
+    copy var:fd to REG_A
+    copy var:ptr to REG_B
+    write SYS_CALL_READ to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    copy REG_RES to var:program
+
+    copy REG_ERROR to REG_A
+    write "EOF" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:exit
+    jump_err label:error
+
+    copy var:ptr to REG_A
+    write OP_INCR to REG_OP
+    cpu_exec
+    copy REG_RES to var:ptr
+    copy REG_RES to var:priority
+
+    copy var:program to REG_A
+    write "//" to REG_B
+    write OP_STARTS_WITH to REG_OP
+    cpu_exec
+    jump_if label:main
+
+    copy var:program to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:main
+
+    copy var:program to REG_A
+    copy var:priority to REG_B
+    write SYS_CALL_SCHED_PROGRAM to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write SYS_CALL_WAIT_SCHED to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    jump label:main
+
+label exit
+    copy var:fd to REG_A
+    write SYS_CALL_CLOSE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    write 0 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label error
+    copy var:program to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write 1 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
