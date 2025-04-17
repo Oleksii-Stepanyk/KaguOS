@@ -1499,7 +1499,7 @@ Error occured
 
 
 FS_HEADER kagu_fs FIRST_USABLE_BLOCK 1522 LAST_USABLE_BLOCK 1800
-
+bye 7 7 7 user user BLOCKS 1522 1757
 
 
 
@@ -1519,242 +1519,242 @@ FS_HEADER kagu_fs FIRST_USABLE_BLOCK 1522 LAST_USABLE_BLOCK 1800
 
 
 FS_HEADER_END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+1 161 894      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 894
+1 162 895      #  write "nnnnnnnnnnggggnnngnnnnngnngggggggnnnnnnnnnnnnnnnnnnn" => 895
+1 163 896      #  write "nnnnnnnnnngnngnnnngnnngnnngnnnnnnnnnnnnnnnnnnnnnnnnn" => 896
+1 164 897      #  write "nnnnnnnnnngnngnnnnngngnnnngnnnnnnnnnnnnnnnnnnnnnnnnn" => 897
+1 165 898      #  write "nnnnnnnnnngggggnnnngggnnnnggggggnnnnnnnnnnnnnnnnnnnn" => 898
+1 166 899      #  write "nnnnnnnnnngnnngnnnnngnnnnngnnnnnnnnnnnnnnnnnnnnnnnnn" => 899
+1 166 900      #  write "nnnnnnnnnngnnngnnnnngnnnnngnnnnnnnnnnnnnnnnnnnnnnnnn" => 900
+1 167 901      #  write "nnnnnnnnnnggggnnnnnngnnnnnggggggggnggnnnnnnnnnnnnnnn" => 901
+1 168 902      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngnnnnnnnnnnnnnnnn" => 902
+1 169 903      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngnnnnnnnnnnnnnnnnn" => 903
+1 161 904      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 904
+1 170 905      #  write "ngnnngnnnnnngnnnnnnnnggggnnnngggnnnngggnnnggnnnnnnnn" => 905
+1 171 906      #  write "ngnngnnnnnngggnnnnngggnngggnnngnnnnnngnnnnggnnnnnnnn" => 906
+1 172 907      #  write "ngnggnnnnnngngnnnnngnnnnnngnnngnnnnnngnnnnggnnnnnnnn" => 907
+1 173 908      #  write "ngggnnnnnngggggnnnngnnnnnnnnnngnnnnnngnnnnggnnnnnnnn" => 908
+1 174 909      #  write "ngngnnnnnngnnngnnnngnnnngggnnngnnnnnngnnnnggnnnnnnnn" => 909
+1 175 910      #  write "ngnngnnnngnnnnngnnngnnnnngnnnngnnnnnngnnnnnnnnnnnnnn" => 910
+1 176 911      #  write "ngnnggnngnnnnnnngnnnggggggnnnnnggggggnnnnnggnnnnnnnn" => 911
+1 161 912      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 912
+1 161 794      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 794
+1 177 795      #  write "nnnnnnnnnnyyyynnnynnnnnynnyyyyyyynnnnnnnnnnnnnnnnnnn" => 795
+1 178 796      #  write "nnnnnnnnnnynnynnnnynnnynnnynnnnnnnnnnnnnnnnnnnnnnnnn" => 796
+1 179 797      #  write "nnnnnnnnnnynnynnnnnynynnnnynnnnnnnnnnnnnnnnnnnnnnnnn" => 797
+1 180 798      #  write "nnnnnnnnnnyyyyynnnnyyynnnnyyyyyynnnnnnnnnnnnnnnnnnnn" => 798
+1 181 799      #  write "nnnnnnnnnnynnnynnnnnynnnnnynnnnnnnnnnnnnnnnnnnnnnnnn" => 799
+1 181 800      #  write "nnnnnnnnnnynnnynnnnnynnnnnynnnnnnnnnnnnnnnnnnnnnnnnn" => 800
+1 182 801      #  write "nnnnnnnnnnyyyynnnnnnynnnnnyyyyyyyynyynnnnnnnnnnnnnnn" => 801
+1 183 802      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnynnnnnnnnnnnnnnnn" => 802
+1 184 803      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnynnnnnnnnnnnnnnnnn" => 803
+1 161 804      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 804
+1 185 805      #  write "nynnnynnnnnnynnnnnnnnyyyynnnnyyynnnnyyynnnyynnnnnnnn" => 805
+1 186 806      #  write "nynnynnnnnnyyynnnnnyyynnyyynnnynnnnnnynnnnyynnnnnnnn" => 806
+1 187 807      #  write "nynyynnnnnnynynnnnnynnnnnnynnnynnnnnnynnnnyynnnnnnnn" => 807
+1 188 808      #  write "nyyynnnnnnyyyyynnnnynnnnnnnnnnynnnnnnynnnnyynnnnnnnn" => 808
+1 189 809      #  write "nynynnnnnnynnnynnnnynnnnyyynnnynnnnnnynnnnyynnnnnnnn" => 809
+1 190 810      #  write "nynnynnnnynnnnnynnnynnnnnynnnnynnnnnnynnnnnnnnnnnnnn" => 810
+1 191 811      #  write "nynnyynnynnnnnnnynnnyyyyyynnnnnyyyyyynnnnnyynnnnnnnn" => 811
+1 161 812      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 812
+1 161 694      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 694
+1 192 695      #  write "nnnnnnnnnnrrrrnnnrnnnnnrnnrrrrrrrnnnnnnnnnnnnnnnnnnn" => 695
+1 193 696      #  write "nnnnnnnnnnrnnrnnnnrnnnrnnnrnnnnnnnnnnnnnnnnnnnnnnnnn" => 696
+1 194 697      #  write "nnnnnnnnnnrnnrnnnnnrnrnnnnrnnnnnnnnnnnnnnnnnnnnnnnnn" => 697
+1 195 698      #  write "nnnnnnnnnnrrrrrnnnnrrrnnnnrrrrrrnnnnnnnnnnnnnnnnnnnn" => 698
+1 196 699      #  write "nnnnnnnnnnrnnnrnnnnnrnnnnnrnnnnnnnnnnnnnnnnnnnnnnnnn" => 699
+1 196 700      #  write "nnnnnnnnnnrnnnrnnnnnrnnnnnrnnnnnnnnnnnnnnnnnnnnnnnnn" => 700
+1 197 701      #  write "nnnnnnnnnnrrrrnnnnnnrnnnnnrrrrrrrrnrrnnnnnnnnnnnnnnn" => 701
+1 198 702      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnrnnnnnnnnnnnnnnnn" => 702
+1 199 703      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnrnnnnnnnnnnnnnnnnn" => 703
+1 161 704      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 704
+1 200 705      #  write "nrnnnrnnnnnnrnnnnnnnnrrrrnnnnrrrnnnnrrrnnnrrnnnnnnnn" => 705
+1 201 706      #  write "nrnnrnnnnnnrrrnnnnnrrrnnrrrnnnrnnnnnnrnnnnrrnnnnnnnn" => 706
+1 202 707      #  write "nrnrrnnnnnnrnrnnnnnrnnnnnnrnnnrnnnnnnrnnnnrrnnnnnnnn" => 707
+1 203 708      #  write "nrrrnnnnnnrrrrrnnnnrnnnnnnnnnnrnnnnnnrnnnnrrnnnnnnnn" => 708
+1 204 709      #  write "nrnrnnnnnnrnnnrnnnnrnnnnrrrnnnrnnnnnnrnnnnrrnnnnnnnn" => 709
+1 205 710      #  write "nrnnrnnnnrnnnnnrnnnrnnnnnrnnnnrnnnnnnrnnnnnnnnnnnnnn" => 710
+1 206 711      #  write "nrnnrrnnrnnnnnnnrnnnrrrrrrnnnnnrrrrrrnnnnnrrnnnnnnnn" => 711
+1 161 712      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 712
+1 161 594      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 594
+1 207 595      #  write "nnnnnnnnnnbbbbnnnbnnnnnbnnbbbbbbbnnnnnnnnnnnnnnnnnnn" => 595
+1 208 596      #  write "nnnnnnnnnnbnnbnnnnbnnnbnnnbnnnnnnnnnnnnnnnnnnnnnnnnn" => 596
+1 209 597      #  write "nnnnnnnnnnbnnbnnnnnbnbnnnnbnnnnnnnnnnnnnnnnnnnnnnnnn" => 597
+1 210 598      #  write "nnnnnnnnnnbbbbbnnnnbbbnnnnbbbbbbnnnnnnnnnnnnnnnnnnnn" => 598
+1 211 599      #  write "nnnnnnnnnnbnnnbnnnnnbnnnnnbnnnnnnnnnnnnnnnnnnnnnnnnn" => 599
+1 211 600      #  write "nnnnnnnnnnbnnnbnnnnnbnnnnnbnnnnnnnnnnnnnnnnnnnnnnnnn" => 600
+1 212 601      #  write "nnnnnnnnnnbbbbnnnnnnbnnnnnbbbbbbbbnbbnnnnnnnnnnnnnnn" => 601
+1 213 602      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbnnnnnnnnnnnnnnnn" => 602
+1 214 603      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbnnnnnnnnnnnnnnnnn" => 603
+1 161 604      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 604
+1 215 605      #  write "nbnnnbnnnnnnbnnnnnnnnbbbbnnnnbbbnnnnbbbnnnbbnnnnnnnn" => 605
+1 216 606      #  write "nbnnbnnnnnnbbbnnnnnbbbnnbbbnnnbnnnnnnbnnnnbbnnnnnnnn" => 606
+1 217 607      #  write "nbnbbnnnnnnbnbnnnnnbnnnnnnbnnnbnnnnnnbnnnnbbnnnnnnnn" => 607
+1 218 608      #  write "nbbbnnnnnnbbbbbnnnnbnnnnnnnnnnbnnnnnnbnnnnbbnnnnnnnn" => 608
+1 219 609      #  write "nbnbnnnnnnbnnnbnnnnbnnnnbbbnnnbnnnnnnbnnnnbbnnnnnnnn" => 609
+1 220 610      #  write "nbnnbnnnnbnnnnnbnnnbnnnnnbnnnnbnnnnnnbnnnnnnnnnnnnnn" => 610
+1 221 611      #  write "nbnnbbnnbnnnnnnnbnnnbbbbbbnnnnnbbbbbbnnnnnbbnnnnnnnn" => 611
+1 161 612      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 612
+1 161 494      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 494
+1 222 495      #  write "nnnnnnnnnnmmmmnnnmnnnnnmnnmmmmmmmnnnnnnnnnnnnnnnnnnn" => 495
+1 223 496      #  write "nnnnnnnnnnmnnmnnnnmnnnmnnnmnnnnnnnnnnnnnnnnnnnnnnnnn" => 496
+1 224 497      #  write "nnnnnnnnnnmnnmnnnnnmnmnnnnmnnnnnnnnnnnnnnnnnnnnnnnnn" => 497
+1 225 498      #  write "nnnnnnnnnnmmmmmnnnnmmmnnnnmmmmmmnnnnnnnnnnnnnnnnnnnn" => 498
+1 226 499      #  write "nnnnnnnnnnmnnnmnnnnnmnnnnnmnnnnnnnnnnnnnnnnnnnnnnnnn" => 499
+1 226 500      #  write "nnnnnnnnnnmnnnmnnnnnmnnnnnmnnnnnnnnnnnnnnnnnnnnnnnnn" => 500
+1 227 501      #  write "nnnnnnnnnnmmmmnnnnnnmnnnnnmmmmmmmmnmmnnnnnnnnnnnnnnn" => 501
+1 228 502      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnmnnnnnnnnnnnnnnnn" => 502
+1 229 503      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnmnnnnnnnnnnnnnnnnn" => 503
+1 161 504      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 504
+1 230 505      #  write "nmnnnmnnnnnnmnnnnnnnnmmmmnnnnmmmnnnnmmmnnnmmnnnnnnnn" => 505
+1 231 506      #  write "nmnnmnnnnnnmmmnnnnnmmmnnmmmnnnmnnnnnnmnnnnmmnnnnnnnn" => 506
+1 232 507      #  write "nmnmmnnnnnnmnmnnnnnmnnnnnnmnnnmnnnnnnmnnnnmmnnnnnnnn" => 507
+1 233 508      #  write "nmmmnnnnnnmmmmmnnnnmnnnnnnnnnnmnnnnnnmnnnnmmnnnnnnnn" => 508
+1 234 509      #  write "nmnmnnnnnnmnnnmnnnnmnnnnmmmnnnmnnnnnnmnnnnmmnnnnnnnn" => 509
+1 235 510      #  write "nmnnmnnnnmnnnnnmnnnmnnnnnmnnnnmnnnnnnmnnnnnnnnnnnnnn" => 510
+1 236 511      #  write "nmnnmmnnmnnnnnnnmnnnmmmmmmnnnnnmmmmmmnnnnnmmnnnnnnnn" => 511
+1 161 512      #  write "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" => 512
+1 237 4        #  write "894" => REG_A
+1 238 6        #  write "913" => REG_B
+1 239 10       #  write SYS_CALL_RENDER_BITMAP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 241 4        #  write "1" => REG_A
+1 242 10       #  write SYS_CALL_SLEEP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 243 4        #  write "794" => REG_A
+1 244 6        #  write "813" => REG_B
+1 239 10       #  write SYS_CALL_RENDER_BITMAP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 241 4        #  write "1" => REG_A
+1 242 10       #  write SYS_CALL_SLEEP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 245 4        #  write "694" => REG_A
+1 246 6        #  write "713" => REG_B
+1 239 10       #  write SYS_CALL_RENDER_BITMAP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 241 4        #  write "1" => REG_A
+1 242 10       #  write SYS_CALL_SLEEP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 247 4        #  write "594" => REG_A
+1 248 6        #  write "613" => REG_B
+1 239 10       #  write SYS_CALL_RENDER_BITMAP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 241 4        #  write "1" => REG_A
+1 242 10       #  write SYS_CALL_SLEEP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 249 4        #  write "494" => REG_A
+1 250 6        #  write "513" => REG_B
+1 239 10       #  write SYS_CALL_RENDER_BITMAP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 241 4        #  write "1" => REG_A
+1 242 10       #  write SYS_CALL_SLEEP => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+1 251 4        #  write "0" => REG_A
+1 252 10       #  write SYS_CALL_EXIT => REG_D
+1 240 2        #  write OP_SYS_CALL => REG_OP
+0              #  cpu_exec
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnggggnnngnnnnngnngggggggnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnngnngnnnngnnngnnngnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnngnngnnnnngngnnnngnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnngggggnnnngggnnnnggggggnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnngnnngnnnnngnnnnngnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnggggnnnnnngnnnnnggggggggnggnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngnnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngnnnnnnnnnnnnnnnnn
+ngnnngnnnnnngnnnnnnnnggggnnnngggnnnngggnnnggnnnnnnnn
+ngnngnnnnnngggnnnnngggnngggnnngnnnnnngnnnnggnnnnnnnn
+ngnggnnnnnngngnnnnngnnnnnngnnngnnnnnngnnnnggnnnnnnnn
+ngggnnnnnngggggnnnngnnnnnnnnnngnnnnnngnnnnggnnnnnnnn
+ngngnnnnnngnnngnnnngnnnngggnnngnnnnnngnnnnggnnnnnnnn
+ngnngnnnngnnnnngnnngnnnnngnnnngnnnnnngnnnnnnnnnnnnnn
+ngnnggnngnnnnnnngnnnggggggnnnnnggggggnnnnnggnnnnnnnn
+nnnnnnnnnnyyyynnnynnnnnynnyyyyyyynnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnynnynnnnynnnynnnynnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnynnynnnnnynynnnnynnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnyyyyynnnnyyynnnnyyyyyynnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnynnnynnnnnynnnnnynnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnyyyynnnnnnynnnnnyyyyyyyynyynnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnynnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnynnnnnnnnnnnnnnnnn
+nynnnynnnnnnynnnnnnnnyyyynnnnyyynnnnyyynnnyynnnnnnnn
+nynnynnnnnnyyynnnnnyyynnyyynnnynnnnnnynnnnyynnnnnnnn
+nynyynnnnnnynynnnnnynnnnnnynnnynnnnnnynnnnyynnnnnnnn
+nyyynnnnnnyyyyynnnnynnnnnnnnnnynnnnnnynnnnyynnnnnnnn
+nynynnnnnnynnnynnnnynnnnyyynnnynnnnnnynnnnyynnnnnnnn
+nynnynnnnynnnnnynnnynnnnnynnnnynnnnnnynnnnnnnnnnnnnn
+nynnyynnynnnnnnnynnnyyyyyynnnnnyyyyyynnnnnyynnnnnnnn
+nnnnnnnnnnrrrrnnnrnnnnnrnnrrrrrrrnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnrnnrnnnnrnnnrnnnrnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnrnnrnnnnnrnrnnnnrnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnrrrrrnnnnrrrnnnnrrrrrrnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnrnnnrnnnnnrnnnnnrnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnrrrrnnnnnnrnnnnnrrrrrrrrnrrnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnrnnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnrnnnnnnnnnnnnnnnnn
+nrnnnrnnnnnnrnnnnnnnnrrrrnnnnrrrnnnnrrrnnnrrnnnnnnnn
+nrnnrnnnnnnrrrnnnnnrrrnnrrrnnnrnnnnnnrnnnnrrnnnnnnnn
+nrnrrnnnnnnrnrnnnnnrnnnnnnrnnnrnnnnnnrnnnnrrnnnnnnnn
+nrrrnnnnnnrrrrrnnnnrnnnnnnnnnnrnnnnnnrnnnnrrnnnnnnnn
+nrnrnnnnnnrnnnrnnnnrnnnnrrrnnnrnnnnnnrnnnnrrnnnnnnnn
+nrnnrnnnnrnnnnnrnnnrnnnnnrnnnnrnnnnnnrnnnnnnnnnnnnnn
+nrnnrrnnrnnnnnnnrnnnrrrrrrnnnnnrrrrrrnnnnnrrnnnnnnnn
+nnnnnnnnnnbbbbnnnbnnnnnbnnbbbbbbbnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnbnnbnnnnbnnnbnnnbnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnbnnbnnnnnbnbnnnnbnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnbbbbbnnnnbbbnnnnbbbbbbnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnbnnnbnnnnnbnnnnnbnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnbbbbnnnnnnbnnnnnbbbbbbbbnbbnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbnnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnbnnnnnnnnnnnnnnnnn
+nbnnnbnnnnnnbnnnnnnnnbbbbnnnnbbbnnnnbbbnnnbbnnnnnnnn
+nbnnbnnnnnnbbbnnnnnbbbnnbbbnnnbnnnnnnbnnnnbbnnnnnnnn
+nbnbbnnnnnnbnbnnnnnbnnnnnnbnnnbnnnnnnbnnnnbbnnnnnnnn
+nbbbnnnnnnbbbbbnnnnbnnnnnnnnnnbnnnnnnbnnnnbbnnnnnnnn
+nbnbnnnnnnbnnnbnnnnbnnnnbbbnnnbnnnnnnbnnnnbbnnnnnnnn
+nbnnbnnnnbnnnnnbnnnbnnnnnbnnnnbnnnnnnbnnnnnnnnnnnnnn
+nbnnbbnnbnnnnnnnbnnnbbbbbbnnnnnbbbbbbnnnnnbbnnnnnnnn
+nnnnnnnnnnmmmmnnnmnnnnnmnnmmmmmmmnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnmnnmnnnnmnnnmnnnmnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnmnnmnnnnnmnmnnnnmnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnmmmmmnnnnmmmnnnnmmmmmmnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnmnnnmnnnnnmnnnnnmnnnnnnnnnnnnnnnnnnnnnnnnn
+nnnnnnnnnnmmmmnnnnnnmnnnnnmmmmmmmmnmmnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnmnnnnnnnnnnnnnnnn
+nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnmnnnnnnnnnnnnnnnnn
+nmnnnmnnnnnnmnnnnnnnnmmmmnnnnmmmnnnnmmmnnnmmnnnnnnnn
+nmnnmnnnnnnmmmnnnnnmmmnnmmmnnnmnnnnnnmnnnnmmnnnnnnnn
+nmnmmnnnnnnmnmnnnnnmnnnnnnmnnnmnnnnnnmnnnnmmnnnnnnnn
+nmmmnnnnnnmmmmmnnnnmnnnnnnnnnnmnnnnnnmnnnnmmnnnnnnnn
+nmnmnnnnnnmnnnmnnnnmnnnnmmmnnnmnnnnnnmnnnnmmnnnnnnnn
+nmnnmnnnnmnnnnnmnnnmnnnnnmnnnnmnnnnnnmnnnnnnnnnnnnnn
+nmnnmmnnmnnnnnnnmnnnmmmmmmnnnnnmmmmmmnnnnnmmnnnnnnnn
+894
+913
+10
+25
+1
+11
+794
+813
+694
+713
+594
+613
+494
+513
+0
+0
 
 
 
