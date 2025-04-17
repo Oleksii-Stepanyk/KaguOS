@@ -1,0 +1,88 @@
+label start
+    write "Enter command to schedule or command exit to quit:" to REG_A
+    write COLOR_NO to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write KEYBOARD_READ_LINE to REG_A
+    write SYS_CALL_READ_INPUT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy REG_RES to REG_A
+    write "exit" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:exit
+
+    var command
+    copy REG_RES to var:command
+
+    write "Enter priority of scheduled command:" to REG_A
+    write COLOR_BLUE to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write KEYBOARD_READ_LINE to REG_A
+    write SYS_CALL_READ_INPUT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    var priority
+    copy REG_RES to var:priority
+
+    copy var:priority to REG_A
+    write OP_IS_NUM to REG_OP
+    cpu_exec
+    jump_if_not label:start
+
+    copy var:priority to REG_A
+    write 0 to REG_B
+    write OP_CMP_LT to REG_OP
+    cpu_exec
+    jump_if label:start
+
+    write 100 to REG_A
+    copy var:priority to REG_B
+    write OP_CMP_LT to REG_OP
+    cpu_exec
+    jump_if label:start
+
+    copy var:command to REG_A
+    copy var:priority to REG_B
+    write SYS_CALL_SCHED_PROGRAM to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:error
+
+    var pid
+    copy REG_RES to var:pid
+    write "Program loaded with PID " to REG_A
+    write COLOR_GREEN to REG_B
+    write SYS_CALL_PRINT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    copy var:pid to REG_A
+    // write COLOR_GREEN to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    // write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    jump label:start
+
+label exit
+    write 0 to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label error
+    copy REG_ERROR to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump label:start

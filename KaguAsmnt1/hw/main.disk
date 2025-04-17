@@ -1,0 +1,20 @@
+20
+START_PARTITION_TABLE
+PARTITION_ENTRIES 1
+NAME part1 START_BLOCK 6 END_BLOCK 20
+END_PARTITION_TABLE
+FS_HEADER kagu_fs FIRST_USABLE_BLOCK 11 LAST_USABLE_BLOCK 20
+1.txt 6 6 6 user user BLOCKS 11 12 16 16
+2.txt 7 7 7 user user BLOCKS 13 14
+3.txt 7 7 7 user user BLOCKS 15 15 19 20
+FS_HEADER_END
+Some from 1.txt
+Another from 1.txt
+2.txt line 1
+2.txt line 2
+this from 3.txt
+More from 1.txt
+a
+b
+this from file 3.txt
+and this => 3.txt

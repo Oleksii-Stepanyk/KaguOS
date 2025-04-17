@@ -1,0 +1,107 @@
+var newOwner
+var newGroup
+var file_path
+var file_attr
+var fd
+
+copy REG_A to var:newOwner
+copy REG_B to var:file_path
+
+label main
+    copy var:newOwner to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:chown_error
+
+    copy var:file_path to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:chown_error
+
+    copy var:file_path to REG_A
+    write SYS_CALL_OPEN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:chown_error
+    copy REG_RES to var:fd
+
+    copy var:newOwner to REG_A
+    write "2" to REG_B
+    write ":" to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:newGroup
+
+    copy var:newGroup to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:chown_error
+
+    copy var:newOwner to REG_A
+    write "1" to REG_B
+    write ":" to REG_C
+    write OP_GET_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:newOwner
+
+    copy var:newOwner to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:chown_error
+
+    copy var:fd to REG_A
+    write SYS_CALL_GET_FILE_ATTR to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:chown_error
+    copy REG_RES to var:file_attr
+
+    copy var:file_attr to REG_A
+    write "4" to REG_B
+    write " " to REG_C
+    copy var:newOwner to REG_D
+    write OP_REPLACE_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:file_attr
+
+    copy var:file_attr to REG_A
+    write "5" to REG_B
+    write " " to REG_C
+    copy var:newGroup to REG_D
+    write OP_REPLACE_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:file_attr
+
+    copy var:fd to REG_A
+    copy var:file_attr to REG_B
+    write SYS_CALL_SET_FILE_ATTR to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:chown_error
+
+    copy var:fd to REG_A
+    write SYS_CALL_CLOSE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label exit
+    write "0" to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label chown_error
+    write "Some error occured" to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write "1" to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec

@@ -1,0 +1,29 @@
+var string
+var res1
+var res2
+write "singleton bree cheese" to var:string
+
+copy var:string to REG_A
+write OP_ENCRYPT_DATA to REG_OP
+cpu_exec
+
+copy REG_RES to var:res1
+
+copy REG_RES to REG_A
+write OP_DECRYPT_DATA to REG_OP
+cpu_exec
+
+copy REG_RES to var:res2
+
+copy var:res1 to DISPLAY_BUFFER
+write COLOR_BLUE to DISPLAY_COLOR
+write OP_DISPLAY_LN to REG_OP
+cpu_exec
+
+copy var:res2 to DISPLAY_BUFFER
+write COLOR_BLUE to DISPLAY_COLOR
+write OP_DISPLAY_LN to REG_OP
+cpu_exec
+
+write OP_HALT to REG_OP
+cpu_exec

@@ -1,0 +1,32 @@
+write "This is self sched, I will resume when other processes from my group finish their work" to REG_A
+write COLOR_CYAN to REG_B
+write SYS_CALL_PRINTLN to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec
+
+write SYS_CALL_WAIT_SCHED to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec
+
+write "Now I'm here again, welcome" to REG_A
+write COLOR_CYAN to REG_B
+write SYS_CALL_PRINTLN to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec
+
+write "Good to see you again" to REG_A
+write COLOR_CYAN to REG_B
+write SYS_CALL_PRINTLN to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec
+
+write "Now bye!" to REG_A
+write COLOR_CYAN to REG_B
+write SYS_CALL_PRINTLN to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec
+
+write 0 to REG_A
+write SYS_CALL_EXIT to REG_D
+write OP_SYS_CALL to REG_OP
+cpu_exec

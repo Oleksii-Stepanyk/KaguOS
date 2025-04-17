@@ -1,0 +1,280 @@
+var forAll
+var newPermission
+var target
+var operation
+var permission
+var operationLabel
+var moduloNum
+var compareNum
+var permissionNum
+var permissionIndex
+var file_path
+var file_attr
+var fd
+
+jump label:main
+
+label add_permission
+    jump_if label:check_if_all
+    copy var:permission to REG_A
+    copy var:permissionNum to REG_B
+    write OP_ADD to REG_OP
+    cpu_exec
+
+    copy var:file_attr to REG_A
+    copy var:permissionIndex to REG_B
+    write " " to REG_C
+    copy REG_RES to REG_D
+    write OP_REPLACE_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:file_attr
+    jump label:check_if_all
+
+label sub_permission
+    jump_if_not label:check_if_all
+    copy var:permission to REG_A
+    copy var:permissionNum to REG_B
+    write OP_SUB to REG_OP
+    cpu_exec
+
+    copy var:file_attr to REG_A
+    copy var:permissionIndex to REG_B
+    write " " to REG_C
+    copy REG_RES to REG_D
+    write OP_REPLACE_COLUMN to REG_OP
+    cpu_exec
+    copy REG_RES to var:file_attr
+    jump label:check_if_all
+
+label main
+    copy REG_A to var:newPermission
+    copy REG_B to var:file_path
+    write "0" to var:forAll
+
+    copy var:newPermission to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:chmod_error
+
+    copy var:file_path to REG_A
+    write "" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:chmod_error
+
+    copy var:file_path to REG_A
+    write SYS_CALL_OPEN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:chmod_error
+    copy REG_RES to var:fd
+
+    copy var:fd to REG_A
+    write SYS_CALL_GET_FILE_ATTR to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:chmod_error
+    copy REG_RES to var:file_attr
+
+    copy var:newPermission to REG_A
+    write OP_GET_LENGTH to REG_OP
+    cpu_exec
+
+    // If length is 3, then some target is specified
+    copy REG_RES to REG_A
+    write "3" to REG_B
+    write OP_CMP_EQ to REG_OP
+    cpu_exec
+    jump_if label:validate_target
+
+    write "1" to var:forAll
+    write "1" to var:permissionIndex
+    jump label:validate_permission
+
+    // Let's validate if our target legit
+    label validate_target
+        // Extract target from argument
+        copy var:newPermission to REG_A
+        write "1" to REG_B
+        write "" to REG_C
+        write OP_GET_COLUMN to REG_OP
+        cpu_exec
+        copy REG_RES to var:target
+
+        copy var:newPermission to REG_A
+        write "1" to REG_B
+        write "" to REG_C
+        write "" to REG_D
+        write OP_REPLACE_COLUMN to REG_OP
+        cpu_exec
+        copy REG_RES to var:newPermission
+
+        // Check if its user
+        write "1" to var:permissionIndex
+        copy var:target to REG_A
+        write "u" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:validate_permission
+
+        // Check if its group
+        write "2" to var:permissionIndex
+        copy var:target to REG_A
+        write "g" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:validate_permission
+
+        // Check if its other
+        write "3" to var:permissionIndex
+        copy var:target to REG_A
+        write "o" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:validate_permission
+
+        // Error if nothing matches
+        jump label:chmod_error
+
+    label validate_permission
+        // Extract permission from argument
+        copy var:newPermission to REG_A
+        write "2" to REG_B
+        write "" to REG_C
+        write OP_GET_COLUMN to REG_OP
+        cpu_exec
+        copy REG_RES to var:permission
+
+        write "2" to var:moduloNum
+        write "0" to var:compareNum
+        write "1" to var:permissionNum
+        // Check if its read
+        copy var:permission to REG_A
+        write "x" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:validate_operation
+
+        write "4" to var:moduloNum
+        write "1" to var:compareNum
+        write "2" to var:permissionNum
+        // Check if its write
+        copy var:permission to REG_A
+        write "w" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:validate_operation
+
+        write "8" to var:moduloNum
+        write "3" to var:compareNum
+        write "4" to var:permissionNum
+        // Check if its execute
+        copy var:permission to REG_A
+        write "r" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:validate_operation
+
+        // Error if nothing matches
+        jump label:chmod_error
+
+    label validate_operation
+        // Extract operation from argument
+        copy var:newPermission to REG_A
+        write "1" to REG_B
+        write "" to REG_C
+        write OP_GET_COLUMN to REG_OP
+        cpu_exec
+        copy REG_RES to var:operation
+
+        write label:add_permission to var:operationLabel
+        // Check if its add
+        copy var:operation to REG_A
+        write "+" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:set_permissions
+
+        write label:sub_permission to var:operationLabel
+        // Check if its remove
+        copy var:operation to REG_A
+        write "-" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:set_permissions
+
+        // Error if nothing matches
+        jump label:chmod_error
+
+    // Now everything is validated, let's apply permissions
+    label set_all_permissions
+        copy var:permissionIndex to REG_A
+        write OP_INCR to REG_OP
+        cpu_exec
+        copy REG_RES to var:permissionIndex
+
+        copy var:permissionIndex to REG_A
+        write "4" to REG_B
+        write OP_CMP_EQ to REG_OP
+        cpu_exec
+        jump_if label:update_permissions
+        jump label:set_permissions
+
+    label set_permissions
+        copy var:file_attr to REG_A
+        copy var:permissionIndex to REG_B
+        write " " to REG_C
+        write OP_GET_COLUMN to REG_OP
+        cpu_exec
+        copy REG_RES to var:permission
+
+        copy var:permission to REG_A
+        copy var:moduloNum to REG_B
+        write OP_MOD to REG_OP
+        cpu_exec
+
+        copy var:compareNum to REG_A
+        copy REG_RES to REG_B
+        write OP_CMP_LT to REG_OP
+        cpu_exec
+        jump *var:operationLabel
+
+        label check_if_all
+            copy var:forAll to REG_A
+            write "1" to REG_B
+            write OP_CMP_EQ to REG_OP
+            cpu_exec
+            jump_if label:set_all_permissions
+
+    label update_permissions
+        copy var:fd to REG_A
+        copy var:file_attr to REG_B
+        write SYS_CALL_SET_FILE_ATTR to REG_D
+        write OP_SYS_CALL to REG_OP
+        cpu_exec
+        jump_err label:chmod_error
+
+    copy var:fd to REG_A
+    write SYS_CALL_CLOSE to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+    jump_err label:chmod_error
+
+label exit
+    write "0" to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+label chmod_error
+    write "Some error occured" to REG_A
+    write COLOR_RED to REG_B
+    write SYS_CALL_PRINTLN to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec
+
+    write "1" to REG_A
+    write SYS_CALL_EXIT to REG_D
+    write OP_SYS_CALL to REG_OP
+    cpu_exec

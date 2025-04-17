@@ -1,0 +1,168 @@
+label startTest
+
+    var fileDescriptor
+    var originalContent
+
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_init
+
+    write "1.txt" to REG_A
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_open
+
+    copy REG_RES to var:fileDescriptor
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+    copy REG_RES to var:originalContent
+
+// Test case 1:
+    write "Written text should be the same as read, case: Hello" to var:testName
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    write "Hello" to REG_C
+
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+
+    copy REG_RES to var:actual
+    write "Hello" to var:expected
+
+    copy PROGRAM_COUNTER to var:nextTestAddress
+    jump label:check
+
+// Test case 2: Encrypt and decrypt an empty string
+    write "Encrypt and decrypt an empty string" to var:testName
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    write "" to REG_C
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+
+    copy REG_RES to var:actual
+    write "" to var:expected
+
+    copy PROGRAM_COUNTER to var:nextTestAddress
+    jump label:check
+
+// Test case 3: Encrypt and decrypt special characters
+    write "Encrypt and decrypt special characters" to var:testName
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    write "@#$%^&*" to REG_C
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+
+    copy REG_RES to var:actual
+    write "@#$%^&*" to var:expected
+
+    copy PROGRAM_COUNTER to var:nextTestAddress
+    jump label:check
+
+// Test case 4: Encrypt and decrypt a long string
+    write "Encrypt and decrypt a long string" to var:testName
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    write "This is a long test string with multiple words and numbers 12345" to REG_C
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+
+    copy REG_RES to var:actual
+    write "This is a long test string with multiple words and numbers 12345" to var:expected
+
+    copy PROGRAM_COUNTER to var:nextTestAddress
+    jump label:check
+
+// Test case 5: Encrypt and decrypt numeric values
+    write "Encrypt and decrypt numeric values" to var:testName
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    write "1234567890" to REG_C
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+
+    copy REG_RES to var:actual
+    write "1234567890" to var:expected
+
+    copy PROGRAM_COUNTER to var:nextTestAddress
+    jump label:check
+
+// Test case 6: Encrypt and decrypt a string with spaces
+    write "Encrypt and decrypt a string with spaces" to var:testName
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    write "   " to REG_C
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+
+    copy REG_RES to var:actual
+    write "   " to var:expected
+
+    copy PROGRAM_COUNTER to var:nextTestAddress
+    jump label:check
+
+// Test case 7: Encrypt and decrypt Unicode characters
+    write "Encrypt and decrypt Unicode characters" to var:testName
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    write "你好，世界" to REG_C
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_read
+
+    copy REG_RES to var:actual
+    write "你好，世界" to var:expected
+
+    copy PROGRAM_COUNTER to var:nextTestAddress
+    jump label:check
+
+// Cleanup
+    copy var:fileDescriptor to REG_A
+    write "1" to REG_B
+    copy var:originalContent to REG_C
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_write
+
+    copy var:fileDescriptor to REG_A
+    copy PROGRAM_COUNTER to var:sys_return
+    jump label:sys_fs_close
+
+// Exit:
+jump label:exit

@@ -1,0 +1,47 @@
+Prompt 1:
+    I need test cases for encrypting and decrypting file content
+    Here is example code:
+
+    label startTest
+
+        var fileDescriptor
+
+        copy PROGRAM_COUNTER to var:sys_return
+        jump label:sys_fs_init
+
+        write "1.txt" to REG_A
+        copy PROGRAM_COUNTER to var:sys_return
+        jump label:sys_fs_open
+
+        copy REG_RES to var:fileDescriptor
+
+    // Test case 1:
+        write "Written text should be the same as read, case: Hello" to var:testName
+        copy var:fileDescriptor to REG_A
+        write "1" to REG_B
+        write "Hello" to REG_C
+        copy PROGRAM_COUNTER to var:sys_return
+        jump label:sys_fs_write
+
+        copy var:fileDescriptor to REG_A
+        write "1" to REG_B
+        
+        copy PROGRAM_COUNTER to var:sys_return
+        jump label:sys_fs_read
+
+        copy REG_RES to var:actual
+        write "Hello" to var:expected
+
+        copy PROGRAM_COUNTER to var:nextTestAddress
+        jump label:check
+
+        copy var:fileDescriptor to REG_A
+        copy PROGRAM_COUNTER to var:sys_return
+        jump label:sys_fs_close
+
+    // Exit:
+    jump label:exit
+
+Prompt 2:
+    You don't need to write ENC(), because encryption is done inside the write command
+    Also, add more generic and corner cases

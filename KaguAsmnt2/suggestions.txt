@@ -1,0 +1,17 @@
+chmod suggestions
+
+x: if 3 < permission % 8 then execution already set
+r: if 0 < permission % 2 then read permission is set
+w: from gpt: 1 < if permission % 4 then write permission is set
+
+changing mode structure:
+    bool flag change_all
+    label change_all
+        label change_u
+            if change_all then jump to change_g
+        label change_g
+            if change_all then jump to change_o
+        label change_o
+
+defining operation to do:
+    // in progress

@@ -1,0 +1,11 @@
+prompt 1:
+using arithmetic operations and without bitwise operations, 
+how can I check if someone has write permission (2),
+if I can have permission from 0 to 7
+
+prompt 2:
+In my chmod implementation, I can change only one type of permission,
+but I can do it either for all or for the particular group (user, group, other)
+Define my algorithm for processing permission flags (e.g., +x or g+u) 
+and define the scope of changing and my algorithm for assigning new permissions with the fewest steps 
+(Assume changing permission is just changing a number, but permissions are not in a 777 format but in 7 7 7).
